@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>60 Jahre Ulli</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg-dark: #1A1410;
+  --bg-card: rgba(255,255,255,0.04);
+  --gold: #C9A84C;
+  --gold-light: #E8D48A;
+  --gold-dim: rgba(201,168,76,0.3);
+  --cream: #F5EDE0;
+  --cream-dim: rgba(245,237,224,0.7);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-dark);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* --- Bokeh Background --- */
+.bokeh {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 0; overflow: hidden;
+}
+.bokeh span {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,212,138,0.25) 0%, transparent 70%);
+  animation: float 12s ease-in-out infinite;
+}
+.bokeh span:nth-child(1) { width: 200px; height: 200px; top: 5%; left: 10%; animation-delay: 0s; }
+.bokeh span:nth-child(2) { width: 150px; height: 150px; top: 20%; right: 15%; animation-delay: -3s; }
+.bokeh span:nth-child(3) { width: 250px; height: 250px; bottom: 20%; left: 5%; animation-delay: -6s; }
+.bokeh span:nth-child(4) { width: 120px; height: 120px; top: 50%; right: 10%; animation-delay: -2s; }
+.bokeh span:nth-child(5) { width: 180px; height: 180px; bottom: 10%; right: 25%; animation-delay: -8s; }
+.bokeh span:nth-child(6) { width: 100px; height: 100px; top: 35%; left: 30%; animation-delay: -4s; }
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+  50% { transform: translateY(-30px) scale(1.1); opacity: 0.5; }
+}
+
+.container {
+  position: relative; z-index: 1;
+  max-width: 680px; margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+/* --- Hero --- */
+.hero { text-align: center; padding: 2rem 0 3rem; }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 14px; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-style: italic; font-weight: 400;
+  font-size: clamp(28px, 6vw, 42px);
+  color: var(--gold-light);
+  line-height: 1.3; margin-bottom: 2rem;
+}
+
+.hero-photo {
+  width: 180px; height: 180px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid var(--gold);
+  box-shadow: 0 0 40px rgba(201,168,76,0.2);
+  margin: 0 auto 2rem;
+  display: block;
+}
+
+.hero-text {
+  font-size: 17px; color: var(--cream-dim);
+  max-width: 540px; margin: 0 auto;
+  line-height: 1.8;
+}
+
+.hero-secret {
+  display: inline-block; margin-top: 1.5rem;
+  font-size: 14px; color: var(--gold);
+  border: 1px solid var(--gold-dim);
+  border-radius: 30px; padding: 8px 20px;
+}
+
+/* --- Section Headings --- */
+.section-title {
+  font-family: var(--font-display);
+  font-size: 24px; font-weight: 400;
+  color: var(--gold-light);
+  margin-bottom: 1.5rem;
+}
+
+/* --- Cards Grid --- */
+.cards { display: grid; grid-template-columns: 1fr; gap: 1rem; margin: 2rem 0 3rem; }
+@media (min-width: 520px) { .cards { grid-template-columns: 1fr 1fr 1fr; } }
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--gold-dim);
+  border-radius: 12px; padding: 1.5rem;
+  text-align: center;
+}
+.card-icon { font-size: 32px; margin-bottom: 0.75rem; display: block; }
+.card h3 {
+  font-family: var(--font-display);
+  font-size: 18px; color: var(--gold-light);
+  margin-bottom: 0.5rem; font-weight: 400;
+}
+.card p { font-size: 15px; color: var(--cream-dim); }
+
+/* --- Deadline Banner --- */
+.deadline {
+  text-align: center; padding: 1rem;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid var(--gold-dim);
+  border-radius: 10px; margin-bottom: 2.5rem;
+  font-size: 15px; color: var(--gold-light);
+}
+
+/* --- Form --- */
+.form-section { margin-bottom: 3rem; }
+
+.field { margin-bottom: 1.5rem; }
+
+.field label {
+  display: block; font-size: 15px; font-weight: 500;
+  color: var(--cream); margin-bottom: 6px;
+}
+.field .required { color: var(--gold); margin-left: 2px; }
+.field .hint {
+  font-size: 13px; color: var(--cream-dim);
+  margin-bottom: 8px; line-height: 1.5;
+}
+
+input[type="text"], input[type="email"], textarea {
+  width: 100%; font-family: var(--font-body);
+  font-size: 16px; color: var(--cream);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--gold-dim);
+  border-radius: 8px; padding: 12px 14px;
+  outline: none; transition: border-color 0.2s;
+}
+input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+  border-color: var(--gold);
+}
+textarea { resize: vertical; min-height: 140px; }
+
+::placeholder { color: rgba(245,237,224,0.35); }
+
+/* --- Tip Box --- */
+.tip-box {
+  background: rgba(201,168,76,0.08);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px; margin-top: 10px;
+  font-size: 14px; color: var(--cream-dim);
+  line-height: 1.6;
+}
+.tip-box strong { color: var(--gold-light); }
+.tip-box a { color: var(--gold); text-decoration: underline; }
+
+/* --- Upload Section --- */
+.upload-section {
+  background: var(--bg-card);
+  border: 1px solid var(--gold-dim);
+  border-radius: 12px; padding: 1.5rem;
+  text-align: center; margin-bottom: 1.5rem;
+}
+.upload-section h3 {
+  font-family: var(--font-display);
+  font-size: 18px; color: var(--gold-light);
+  margin-bottom: 0.5rem; font-weight: 400;
+}
+.upload-section p {
+  font-size: 14px; color: var(--cream-dim);
+  margin-bottom: 1rem;
+}
+.upload-btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 16px; font-weight: 500;
+  color: var(--bg-dark); background: var(--gold);
+  border: none; border-radius: 8px;
+  padding: 12px 28px; cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.upload-btn:hover { background: var(--gold-light); }
+
+/* --- Checkbox Section --- */
+.checkbox-section {
+  background: rgba(201,168,76,0.08);
+  border: 2px solid var(--gold-dim);
+  border-radius: 12px; padding: 1.5rem;
+  margin: 2rem 0;
+}
+.checkbox-wrap {
+  display: flex; align-items: flex-start; gap: 12px;
+  cursor: pointer;
+}
+.checkbox-wrap input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none;
+  width: 22px; height: 22px; min-width: 22px;
+  border: 2px solid var(--gold); border-radius: 4px;
+  background: transparent; cursor: pointer;
+  margin-top: 2px; position: relative;
+}
+.checkbox-wrap input[type="checkbox"]:checked {
+  background: var(--gold);
+}
+.checkbox-wrap input[type="checkbox"]:checked::after {
+  content: ''; position: absolute;
+  left: 5px; top: 1px; width: 6px; height: 12px;
+  border: solid var(--bg-dark); border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.checkbox-label {
+  font-size: 16px; font-weight: 500;
+  color: var(--gold-light); line-height: 1.5;
+}
+.checkbox-hint {
+  font-size: 14px; color: var(--cream-dim);
+  margin-top: 8px; padding-left: 34px;
+  line-height: 1.6;
+}
+.checkbox-warning {
+  display: none; font-size: 13px;
+  color: #e8a87c; margin-top: 6px;
+  padding-left: 34px;
+}
+
+/* --- Submit --- */
+.submit-btn {
+  display: block; width: 100%;
+  font-family: var(--font-body);
+  font-size: 18px; font-weight: 700;
+  color: var(--bg-dark); background: var(--gold);
+  border: none; border-radius: 10px;
+  padding: 16px; cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  margin-top: 1.5rem;
+}
+.submit-btn:hover { background: var(--gold-light); }
+.submit-btn:active { transform: scale(0.98); }
+.submit-btn:disabled {
+  opacity: 0.5; cursor: not-allowed;
+  transform: none;
+}
+
+.submit-footer {
+  text-align: center; margin-top: 1rem;
+  font-size: 14px; color: var(--cream-dim);
+  line-height: 1.6;
+}
+
+/* --- Success Page --- */
+.success-page {
+  display: none; text-align: center;
+  padding: 4rem 1rem;
+}
+.success-page .check-circle {
+  width: 80px; height: 80px; border-radius: 50%;
+  border: 3px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.5rem; font-size: 36px;
+}
+.success-page h2 {
+  font-family: var(--font-display);
+  font-size: 28px; color: var(--gold-light);
+  margin-bottom: 1rem; font-weight: 400;
+}
+.success-page p {
+  font-size: 17px; color: var(--cream-dim);
+  max-width: 440px; margin: 0 auto;
+  line-height: 1.7;
+}
+.success-page .btn-again {
+  display: inline-block; margin-top: 2rem;
+  font-family: var(--font-body);
+  font-size: 15px; color: var(--gold);
+  border: 1px solid var(--gold-dim);
+  border-radius: 8px; padding: 10px 24px;
+  text-decoration: none; cursor: pointer;
+  background: transparent;
+  transition: background 0.2s;
+}
+.success-page .btn-again:hover { background: rgba(201,168,76,0.1); }
+
+/* --- Help Accordion --- */
+.help-section { margin-top: 3rem; }
+
+.accordion-item {
+  border-bottom: 1px solid var(--gold-dim);
+}
+.accordion-btn {
+  width: 100%; background: none; border: none;
+  font-family: var(--font-body);
+  font-size: 16px; color: var(--cream);
+  padding: 16px 0; text-align: left;
+  cursor: pointer; display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.accordion-btn:hover { color: var(--gold-light); }
+.accordion-arrow {
+  font-size: 14px; color: var(--gold);
+  transition: transform 0.3s;
+}
+.accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+.accordion-content {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.accordion-inner {
+  padding: 0 0 16px;
+  font-size: 15px; color: var(--cream-dim);
+  line-height: 1.7;
+}
+.accordion-inner a { color: var(--gold); }
+
+/* --- Contact --- */
+.contact-section {
+  text-align: center; margin-top: 3rem;
+  padding: 2rem 0; border-top: 1px solid var(--gold-dim);
+}
+.contact-section p { font-size: 15px; color: var(--cream-dim); }
+.contact-section a { color: var(--gold); text-decoration: none; }
+.contact-section a:hover { text-decoration: underline; }
+
+/* --- Privacy --- */
+.privacy {
+  text-align: center; margin-top: 2rem;
+  font-size: 13px; color: rgba(245,237,224,0.4);
+}
+
+/* --- Status Message --- */
+.status-msg {
+  text-align: center; padding: 12px;
+  border-radius: 8px; margin-top: 1rem;
+  font-size: 14px; display: none;
+}
+.status-msg.error {
+  background: rgba(200,60,60,0.15);
+  border: 1px solid rgba(200,60,60,0.3);
+  color: #f0a0a0;
+}
+.status-msg.sending {
+  background: rgba(201,168,76,0.1);
+  border: 1px solid var(--gold-dim);
+  color: var(--gold-light);
+}
+</style>
+</head>
+<body>
+
+<!-- Bokeh Background -->
+<div class="bokeh">
+  <span></span><span></span><span></span>
+  <span></span><span></span><span></span>
+</div>
+
+<div class="container">
+
+  <!-- ===== MAIN FORM PAGE ===== -->
+  <div id="formPage">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="eyebrow">Eine Überraschung für Ulli</div>
+      <h1 class="hero-title">60 Jahre Ulli — und wir haben so viel zu erzählen.</h1>
+      <img src="ulli-foto.jpg" alt="Ulli" class="hero-photo">
+      <p class="hero-text">
+        Sechzig Jahre voller Geschichten, Lachen, unvergesslicher Momente — und du warst dabei.
+        Wir möchten Ulli zum Geburtstag ein ganz besonderes Geschenk machen: eine Sammlung eurer
+        schönsten Erinnerungen, Bilder und Videobotschaften.
+      </p>
+      <span class="hero-secret">Alles bleibt bis zur Feier geheim</span>
+    </section>
+
+    <!-- What You Can Send -->
+    <section>
+      <h2 class="section-title">Was du einschicken kannst</h2>
+      <div class="cards">
+        <div class="card">
+          <span class="card-icon">&#9997;&#65039;</span>
+          <h3>Geschichte erzählen</h3>
+          <p>Was hast du mit Ulli erlebt? Lustig, herzlich, unvergesslich — alles ist willkommen.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">&#128248;</span>
+          <h3>Fotos oder Videos</h3>
+          <p>Ein altes Bild, ein gemeinsamer Moment, ein Videoclip — schick uns, was du hast.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">&#127909;</span>
+          <h3>Videobotschaft</h3>
+          <p>Wünsch Ulli direkt alles Gute — per kurzer Videoaufnahme mit deinem Handy.</p>
+        </div>
+      </div>
+      <p style="text-align:center;font-size:14px;color:var(--cream-dim);margin-bottom:2rem;">
+        Du kannst auch alles auf einmal einschicken — oder das Formular einfach mehrfach ausfüllen.
+      </p>
+    </section>
+
+    <!-- Deadline -->
+    <div class="deadline">
+      Bitte schick uns deinen Beitrag bis zum <strong>16. August</strong> — damit wir alles rechtzeitig vorbereiten können.
+    </div>
+
+    <!-- Form -->
+    <section class="form-section">
+      <h2 class="section-title">Dein Beitrag</h2>
+      <form id="beitragForm" novalidate>
+
+        <!-- Name -->
+        <div class="field">
+          <label for="name">Dein Name <span class="required">*</span></label>
+          <input type="text" id="name" name="name" placeholder="Vor- und Nachname" required>
+        </div>
+
+        <!-- Contact -->
+        <div class="field">
+          <label for="kontakt">E-Mail oder Telefonnummer</label>
+          <div class="hint">Nur falls wir Rückfragen haben — wir melden uns nur wenn nötig.</div>
+          <input type="text" id="kontakt" name="kontakt" placeholder="z.B. max@beispiel.de oder 0176 …">
+        </div>
+
+        <!-- Story -->
+        <div class="field">
+          <label for="geschichte">Deine Geschichte</label>
+          <div class="hint">
+            Was ist deine schönste, lustigste oder bewegendste Erinnerung mit Ulli?
+            Kein Erlebnis ist zu klein, kein Moment zu alltäglich — erzähl einfach drauflos.
+          </div>
+          <textarea id="geschichte" name="geschichte" placeholder="Erzähl einfach drauflos…"></textarea>
+          <div class="tip-box">
+            <strong>Tipp — einfach sprechen statt tippen:</strong><br>
+            Tippe auf das Mikrofon-Symbol auf deiner Tastatur und sprich drauflos.
+            So fließt die Geschichte viel natürlicher.<br>
+            <a href="https://www.youtube.com/results?search_query=Spracheingabe+iPhone+aktivieren" target="_blank" rel="noopener">Anleitung iPhone</a> ·
+            <a href="https://www.youtube.com/results?search_query=Spracheingabe+Android+aktivieren" target="_blank" rel="noopener">Anleitung Android</a> ·
+            Am PC? <a href="https://vowen.ai/" target="_blank" rel="noopener">Vowen</a> — kostenlose Diktiersoftware.
+          </div>
+        </div>
+
+        <!-- File Upload: Photos/Videos -->
+        <div class="upload-section">
+          <h3>Fotos oder Videos hochladen</h3>
+          <p>Lade Bilder oder Videoclips hoch, die zu deiner Erinnerung passen.</p>
+          <a href="https://6353281287.filemail.com" target="_blank" rel="noopener" class="upload-btn" id="uploadFotos">
+            Fotos &amp; Videos hochladen
+          </a>
+        </div>
+
+        <!-- File Upload: Video Message -->
+        <div class="upload-section">
+          <h3>Videobotschaft hochladen</h3>
+          <p>Nimm mit deinem Handy ein kurzes Video auf und lade es hier hoch —
+          wünsch Ulli direkt alles Gute! Ein bis zwei Minuten reichen völlig.</p>
+          <a href="https://6353281287.filemail.com" target="_blank" rel="noopener" class="upload-btn" id="uploadVideo">
+            Videobotschaft hochladen
+          </a>
+        </div>
+
+        <!-- File Notes -->
+        <div class="field">
+          <label for="anmerkungen">Anmerkungen zu deinen Dateien</label>
+          <div class="hint">Falls du etwas zu deinen Fotos oder Videos erklären möchtest.</div>
+          <textarea id="anmerkungen" name="anmerkungen" rows="3" placeholder="z.B. Das Foto ist von der Wanderung 2019 am Bodensee…" style="min-height:80px;"></textarea>
+        </div>
+
+        <!-- Checkbox: Live -->
+        <div class="checkbox-section">
+          <label class="checkbox-wrap">
+            <input type="checkbox" id="liveVortragen" name="liveVortragen">
+            <span class="checkbox-label">Ich könnte mir vorstellen, meinen Beitrag auf der Feier persönlich zu teilen.</span>
+          </label>
+          <div class="checkbox-hint">
+            Das Rahmenprogramm steht noch nicht in allen Einzelheiten fest — aber wenn du dir
+            vorstellen könntest, deine Geschichte zu erzählen, ein Foto zu zeigen oder eine
+            Botschaft vorzutragen, gib uns schon mal ein Zeichen.
+          </div>
+          <div class="checkbox-warning" id="checkboxWarning">
+            Bitte trage zuerst eine Geschichte ein, wenn du live vortragen möchtest.
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="submit-btn" id="submitBtn">Einsendung abschicken</button>
+        <div class="status-msg" id="statusMsg"></div>
+        <div class="submit-footer">
+          Alles bleibt bis zur Feier geheim — versprochen!<br>
+          Mehrere Beiträge? Einfach das Formular erneut ausfüllen.
+        </div>
+      </form>
+    </section>
+
+    <!-- Help Section -->
+    <section class="help-section">
+      <h2 class="section-title">Brauchst du Hilfe?</h2>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" type="button">
+          Wie tippe oder spreche ich meine Geschichte?
+          <span class="accordion-arrow">&#9660;</span>
+        </button>
+        <div class="accordion-content">
+          <div class="accordion-inner">
+            Du kannst deine Geschichte ganz normal eintippen — oder einfach sprechen.
+            Viele finden es leichter, Erinnerungen zu erzählen als sie aufzuschreiben.<br><br>
+            <strong>Am Handy:</strong> Tippe in das Textfeld und dann auf das Mikrofon-Symbol
+            auf deiner Tastatur. Dann einfach drauflosreden.<br>
+            <a href="https://www.youtube.com/results?search_query=Spracheingabe+iPhone+aktivieren" target="_blank" rel="noopener">Anleitung iPhone</a> ·
+            <a href="https://www.youtube.com/results?search_query=Spracheingabe+Android+aktivieren" target="_blank" rel="noopener">Anleitung Android</a><br><br>
+            <strong>Am PC:</strong> Wir empfehlen <a href="https://vowen.ai/" target="_blank" rel="noopener">Vowen</a> —
+            kostenlos, kein Konto nötig, funktioniert auf Mac und Windows.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" type="button">
+          Wie kann mir KI beim Schreiben helfen?
+          <span class="accordion-arrow">&#9660;</span>
+        </button>
+        <div class="accordion-content">
+          <div class="accordion-inner">
+            Keine Sorge — du musst kein Technikprofi sein. ChatGPT ist ein kostenloses
+            KI-Programm, dem du einfach erzählst was du erlebt hast, und es hilft dir
+            daraus einen schönen Text zu formulieren.<br><br>
+            <strong>So geht's:</strong><br>
+            1. Kopiere den Text unten<br>
+            2. Öffne <a href="https://chat.openai.com" target="_blank" rel="noopener">ChatGPT</a> (kostenlos, kein Konto nötig)<br>
+            3. Füge den Text ein, ergänze die Lücken, und drücke Enter<br>
+            4. Kopiere das Ergebnis und füge es oben ins Formular ein<br><br>
+            <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px;font-size:14px;line-height:1.6;">
+              Ich möchte eine persönliche Geschichte über Ulli (Hans-Ulrich Schmidt) aufschreiben für seinen 60. Geburtstag. Hilf mir, sie schön zu formulieren.<br><br>
+              Meine Beziehung zu Ulli: <em style="color:var(--gold);">[z.B. alter Freund / Arbeitskollege / Bruder …]</em><br>
+              Der Ton soll sein: <em style="color:var(--gold);">[z.B. herzlich und lustig / eher emotional]</em><br>
+              Länge: <em style="color:var(--gold);">[z.B. kurz, ca. 5 Sätze / etwas ausführlicher]</em><br><br>
+              Bitte behalte meinen persönlichen Ton bei, erfinde nichts dazu.<br><br>
+              Hier ist meine Erinnerung:<br>
+              <em style="color:var(--gold);">[Hier einfach drauflosschreiben]</em>
+            </div>
+            <br>
+            <a href="https://www.youtube.com/results?search_query=ChatGPT+Anleitung+Anfänger+Deutsch" target="_blank" rel="noopener">ChatGPT für Anfänger — kurze Einführung (YouTube)</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" type="button">
+          Wie lade ich Fotos hoch?
+          <span class="accordion-arrow">&#9660;</span>
+        </button>
+        <div class="accordion-content">
+          <div class="accordion-inner">
+            Klicke auf den Button „Fotos & Videos hochladen". Es öffnet sich eine
+            Seite, auf der du Dateien auswählen oder per Drag & Drop hineinziehen kannst.<br><br>
+            <strong>Am Handy:</strong> Tippe auf den Button und wähle Bilder aus deiner Galerie.
+            Du kannst auch mehrere auf einmal auswählen.<br><br>
+            <strong>Am PC:</strong> Klicke auf den Button und wähle Dateien aus, oder ziehe
+            sie direkt in den markierten Bereich.<br><br>
+            <a href="https://www.youtube.com/results?search_query=Fotos+finden+iPhone+Galerie" target="_blank" rel="noopener">Fotos finden auf dem iPhone</a> ·
+            <a href="https://www.youtube.com/results?search_query=Fotos+finden+Android+Galerie" target="_blank" rel="noopener">Fotos finden auf Android</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" type="button">
+          Wie lade ich ein Video hoch?
+          <span class="accordion-arrow">&#9660;</span>
+        </button>
+        <div class="accordion-content">
+          <div class="accordion-inner">
+            Genau wie bei Fotos — klicke auf den Upload-Button und wähle dein Video aus.
+            Videos können etwas größer sein, daher bitte kurz Geduld beim Hochladen.<br><br>
+            <strong>Tipp:</strong> Ein kurzes Video von 1–2 Minuten ist meistens viel
+            wirkungsvoller als ein langes. Einfach draufhalten und drauflosreden!<br><br>
+            <a href="https://www.youtube.com/results?search_query=Video+aufnehmen+iPhone+Anleitung" target="_blank" rel="noopener">Video aufnehmen auf dem iPhone</a> ·
+            <a href="https://www.youtube.com/results?search_query=Video+aufnehmen+Android+Anleitung" target="_blank" rel="noopener">Video aufnehmen auf Android</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section">
+      <h2 class="section-title" style="font-size:20px;">Fragen oder Probleme?</h2>
+      <p>
+        Bei technischen Fragen oder wenn etwas nicht klappt —<br>
+        melde dich einfach bei Johanna (Ullis Tochter):<br><br>
+        <a href="tel:+491606202301" style="font-size:17px;">0160 620 2301</a><br>
+        Auch gerne per WhatsApp
+      </p>
+    </section>
+
+    <!-- Privacy -->
+    <div class="privacy">
+      Deine Daten werden ausschließlich für Ullis Geburtstagsüberraschung verwendet
+      und nicht an Dritte weitergegeben.
+    </div>
+
+  </div>
+
+  <!-- ===== SUCCESS PAGE ===== -->
+  <div id="successPage" class="success-page">
+    <div class="check-circle">&#10003;</div>
+    <h2 id="successTitle">Vielen Dank!</h2>
+    <p>
+      Dein Beitrag ist sicher bei uns angekommen. Ulli wird sich riesig freuen —
+      auch wenn er noch nichts davon weiß.<br><br>
+      Bis zur Feier am 22. August!
+    </p>
+    <button class="btn-again" onclick="resetForm()">Noch einen Beitrag einsenden</button>
+  </div>
+
+</div>
+
+<script>
+// --- Config ---
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby0PpDUCYVcVcqP7UJm9RKITdu8uL16dE71Ez7K8tdo6hhWJSpVZAVYuktZPszosTI0aw/exec';
+
+// --- Accordion ---
+document.querySelectorAll('.accordion-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const content = item.querySelector('.accordion-content');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.accordion-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.accordion-content').style.maxHeight = null;
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      content.style.maxHeight = content.scrollHeight + 'px';
+    }
+  });
+});
+
+// --- Checkbox validation ---
+const checkbox = document.getElementById('liveVortragen');
+const geschichte = document.getElementById('geschichte');
+const warning = document.getElementById('checkboxWarning');
+
+checkbox.addEventListener('change', () => {
+  if (checkbox.checked && !geschichte.value.trim()) {
+    warning.style.display = 'block';
+    checkbox.checked = false;
+  } else {
+    warning.style.display = 'none';
+  }
+});
+
+geschichte.addEventListener('input', () => {
+  if (geschichte.value.trim()) {
+    warning.style.display = 'none';
+  }
+});
+
+// --- Track if user clicked upload buttons ---
+let hatDateien = false;
+document.getElementById('uploadFotos').addEventListener('click', () => { hatDateien = true; });
+document.getElementById('uploadVideo').addEventListener('click', () => { hatDateien = true; });
+
+// --- Form Submit ---
+const form = document.getElementById('beitragForm');
+const submitBtn = document.getElementById('submitBtn');
+const statusMsg = document.getElementById('statusMsg');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  if (!name) {
+    document.getElementById('name').focus();
+    return;
+  }
+
+  // Revalidate checkbox
+  if (checkbox.checked && !geschichte.value.trim()) {
+    warning.style.display = 'block';
+    checkbox.checked = false;
+    geschichte.focus();
+    return;
+  }
+
+  submitBtn.disabled = true;
+  statusMsg.className = 'status-msg sending';
+  statusMsg.style.display = 'block';
+  statusMsg.textContent = 'Wird gesendet…';
+
+  const payload = {
+    name: name,
+    kontakt: document.getElementById('kontakt').value.trim(),
+    geschichte: geschichte.value.trim(),
+    anmerkungen: document.getElementById('anmerkungen').value.trim(),
+    liveVortragen: checkbox.checked,
+    hatDateien: hatDateien
+  };
+
+  try {
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload)
+    });
+
+    // Show success page
+    document.getElementById('formPage').style.display = 'none';
+    document.getElementById('successPage').style.display = 'block';
+    document.getElementById('successTitle').textContent = 'Vielen Dank, ' + name + '!';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch (err) {
+    statusMsg.className = 'status-msg error';
+    statusMsg.textContent = 'Etwas ist schiefgelaufen. Bitte versuche es erneut oder melde dich bei Johanna.';
+    submitBtn.disabled = false;
+  }
+});
+
+function resetForm() {
+  form.reset();
+  hatDateien = false;
+  document.getElementById('successPage').style.display = 'none';
+  document.getElementById('formPage').style.display = 'block';
+  statusMsg.style.display = 'none';
+  submitBtn.disabled = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
